@@ -29,18 +29,35 @@ Gameeng.prototype.countNeighbors = function(pos_x, pos_y) {
   else if (pos_y === 63) right = true;
   
   if (!top) { 
-    if (!left && cellIsAlive(pos_x-1, pos_y-1)) neighborCount++;
-    if (cellIsAlive(pos_x, pos_y-1)) neighborCount++;
-    if (!right && cellIsAlive(pos_x+1, pos_y-1)) neighborCount++;
+    if (!left && this.cellIsAlive(pos_x-1, pos_y-1)) neighborCount++;
+    if (this.cellIsAlive(pos_x, pos_y-1)) neighborCount++;
+    if (!right && this.cellIsAlive(pos_x+1, pos_y-1)) neighborCount++;
   }
-  if (!left && cellIsAlive(pos_x-1, pos_y)) neighborCount++;
-  if (!right && cellIsAlive(pos_x+1, pos_y)) neighborCount++;
+  if (!left && this.cellIsAlive(pos_x-1, pos_y)) neighborCount++;
+  if (!right && this.cellIsAlive(pos_x+1, pos_y)) neighborCount++;
   if (!bottom) {
-    if (cellIsAlive(pos_x-1, pos_y+1)) neighborCount++;
-    if (cellIsAlive(pos_x, pos_y+1)) neighborCount++;
-    if (cellIsAlive(pos_x+1, pos_y+1)) neighborCount++;
+    if (this.cellIsAlive(pos_x-1, pos_y+1)) neighborCount++;
+    if (this.cellIsAlive(pos_x, pos_y+1)) neighborCount++;
+    if (this.cellIsAlive(pos_x+1, pos_y+1)) neighborCount++;
   }
 
   return neighborCount;
+};
+Gameeng.prototype.cellSetLife = function(neighborCount) {
+  if (neighborCount === 2 || neighborCount === 3) {
+    return true;
+  } else {
+    return false;
+  }
+};
+Gameeng.prototype.update = function() {
+  var result_board = [];
+  for (var i = 0; i < 64; i++) {
+    result_board[i] = [];
+    for (var j = 0; j < 64; j++) {
+      result_board[i][j] = this.cellSetLife( this.countNeighbors(i, j) ) ? 1:0;
+    }
+  }
+  this.board = result_board;
 };
 module.exports = Gameeng;
