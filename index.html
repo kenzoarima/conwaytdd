@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Conway's Game of Life</title>
+</head>
+<style type="text/css">
+* {
+  box-sizing: border-box;
+}
+body {
+  background: #111;
+}
+.gameboard {
+  display: flex;
+  width: 640px;
+  flex-wrap: wrap;
+}
+.gameboard div {
+  border: 1px solid #111;
+  flex-basis: 20px;
+  width: 20px;
+  height: 20px;
+  background: #000;
+  transition: background 0.3s;
+}
+.gameboard div.alive {
+  background: limegreen;
+}
+</style>
+<body>
+  <div class="gameboard"></div>
+</body>
+<script type="text/javascript" src="Gameeng.js"></script>
+<script type="text/javascript" src="main.js"></script>
+</html>

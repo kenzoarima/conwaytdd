@@ -1,9 +1,9 @@
-var Gameeng = require('Gameeng');
+//var Gameeng = require('Gameeng');
 
 /**
  * Manual toggle to play/stop game.
  */
-var playGame = false;
+var playGame = true;
 
 /**
  * Draws the game board on the DOM
