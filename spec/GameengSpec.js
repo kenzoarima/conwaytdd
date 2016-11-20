@@ -4,7 +4,7 @@ describe("TDD for Conway's Game of Life", function() {
   
   beforeEach(function() {
     game = new Gameeng();
-    game.init();
+    game.board = game.init();
   });
 
   it("initializes to a 64 x 64 square array", function() {
@@ -13,7 +13,7 @@ describe("TDD for Conway's Game of Life", function() {
   });
 
   it("can take in a 2d array to initialize the living cells", function() {
-    game.populate([
+    game.board = game.populate([
       [0,0], [0,1], [0,2], [1,1]
     ]);
     expect(game.board[0][1]).toEqual(1);
@@ -41,10 +41,10 @@ describe("TDD for Conway's Game of Life", function() {
   });
 
   it("more tests", function() {
-    game.populate([
+    game.board = game.populate([
       [0,0], [0,1], [0,2], [1,1]
     ]);
-    game.update();
+    game.board = game.update();
 
     it("and cell[1,1] should perish", function() {
       expect(game.board[1][1]).toEqual(0);

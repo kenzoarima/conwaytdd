@@ -1,22 +1,51 @@
 function Gameeng() {
   this.board = [];
 }
+
+/**
+ * Initializes the game board to a 64 x 64 square board.
+ * @return {Array} The copy of the game board after initializing.
+ */
 Gameeng.prototype.init = function() {
+  var tempboard = [];
   for (var i = 0; i < 64; i++) {
-    this.board[i] = [];
+    tempboard[i] = [];
     for (var j = 0; j < 64; j++) {
-      this.board[i][j] = 0;
+      tempboard[i][j] = 0;
     }
   }
+  return tempboard;
 };
+
+/**
+ * Populate the game board with an array of live cells.
+ * @param  {Array} aliveArr A 2 dimensional array.
+ * @return {Array}          The copy of the game board after adding in the live cells.
+ */
 Gameeng.prototype.populate = function(aliveArr) {
+  var tempboard = this.board;
   aliveArr.forEach(function(cell) {
-    this[cell[0]][cell[1]] = 1;
-  }, this.board);
+    tempboard[cell[0]][cell[1]] = 1;
+  });
+  return tempboard;
 };
+
+/**
+ * Checks if cell is alive.
+ * @param  {Number} pos_x 
+ * @param  {Number} pos_y 
+ * @return {Boolean}       If alive, true, else, false.
+ */
 Gameeng.prototype.cellIsAlive = function(pos_x, pos_y) {
   return this.board[pos_x] && this.board[pos_x][pos_y];
 };
+
+/**
+ * Count the number of neighbors of the cell.
+ * @param  {Number} pos_x 
+ * @param  {Number} pos_y 
+ * @return {Number}       Number of neighbors.
+ */
 Gameeng.prototype.countNeighbors = function(pos_x, pos_y) {
   var neighborCount = 0;
   var top, bottom, left, right = false;
@@ -43,6 +72,12 @@ Gameeng.prototype.countNeighbors = function(pos_x, pos_y) {
 
   return neighborCount;
 };
+
+/**
+ * Set the life status of the cell depending on the number of neighbors.
+ * @param  {Number} neighborCount 
+ * @return {Boolean}               Life status of cell.
+ */
 Gameeng.prototype.cellSetLife = function(neighborCount) {
   if (neighborCount === 2 || neighborCount === 3) {
     return true;
@@ -50,14 +85,18 @@ Gameeng.prototype.cellSetLife = function(neighborCount) {
     return false;
   }
 };
+
+/**
+ * Update function for the gameboard's cells.
+ * @return {Array} The copy of the gameboard.
+ */
 Gameeng.prototype.update = function() {
-  var result_board = [];
+  var tempboard = this.board;
   for (var i = 0; i < 64; i++) {
-    result_board[i] = [];
     for (var j = 0; j < 64; j++) {
-      result_board[i][j] = this.cellSetLife( this.countNeighbors(i, j) ) ? 1:0;
+      tempboard[i][j] = this.cellSetLife( this.countNeighbors(i, j) ) ? 1:0;
     }
   }
-  this.board = result_board;
+  return tempboard;
 };
 module.exports = Gameeng;
