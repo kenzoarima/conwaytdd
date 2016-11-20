@@ -65,9 +65,9 @@ Gameeng.prototype.countNeighbors = function(pos_x, pos_y) {
   if (!left && this.cellIsAlive(pos_x-1, pos_y)) neighborCount++;
   if (!right && this.cellIsAlive(pos_x+1, pos_y)) neighborCount++;
   if (!bottom) {
-    if (this.cellIsAlive(pos_x-1, pos_y+1)) neighborCount++;
+    if (!left && this.cellIsAlive(pos_x-1, pos_y+1)) neighborCount++;
     if (this.cellIsAlive(pos_x, pos_y+1)) neighborCount++;
-    if (this.cellIsAlive(pos_x+1, pos_y+1)) neighborCount++;
+    if (!right && this.cellIsAlive(pos_x+1, pos_y+1)) neighborCount++;
   }
 
   return neighborCount;
