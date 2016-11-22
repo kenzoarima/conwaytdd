@@ -3,14 +3,14 @@ function Gameeng() {
 }
 
 /**
- * Initializes the game board to a 64 x 64 square board.
+ * Initializes the game board to a 32 x 32 square board.
  * @return {Array} The copy of the game board after initializing.
  */
 Gameeng.prototype.init = function() {
   var tempboard = [];
-  for (var i = 0; i < 64; i++) {
+  for (var i = 0; i < 32; i++) {
     tempboard[i] = [];
-    for (var j = 0; j < 64; j++) {
+    for (var j = 0; j < 32; j++) {
       tempboard[i][j] = 0;
     }
   }
@@ -48,14 +48,14 @@ Gameeng.prototype.cellIsAlive = function(pos_x, pos_y) {
  */
 Gameeng.prototype.countNeighbors = function(pos_x, pos_y) {
   var neighborCount = 0;
-  var top, bottom, left, right = false;
+  var top = false, bottom = false, left = false, right = false;
 
   // Checks if the cell we are looking at is at the edge of the board
-  if (pos_x === 0) top = true;
-  else if (pos_x === 63) bottom = true;
+  if (pos_x === 0) left = true;
+  else if (pos_x === 31) right = true;
   
-  if (pos_y === 0) left = true;
-  else if (pos_y === 63) right = true;
+  if (pos_y === 0) top = true;
+  else if (pos_y === 31) bottom = true;
   
   if (!top) { 
     if (!left && this.cellIsAlive(pos_x-1, pos_y-1)) neighborCount++;
@@ -92,8 +92,8 @@ Gameeng.prototype.cellSetLife = function(neighborCount) {
  */
 Gameeng.prototype.update = function() {
   var tempboard = this.board;
-  for (var i = 0; i < 64; i++) {
-    for (var j = 0; j < 64; j++) {
+  for (var i = 0; i < 32; i++) {
+    for (var j = 0; j < 32; j++) {
       tempboard[i][j] = this.cellSetLife( this.countNeighbors(i, j) ) ? 1:0;
     }
   }

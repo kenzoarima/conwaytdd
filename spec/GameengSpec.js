@@ -7,9 +7,9 @@ describe("TDD for Conway's Game of Life", function() {
     game.board = game.init();
   });
 
-  it("initializes to a 64 x 64 square array", function() {
-    expect(game.board.length).toEqual(64);
-    expect(game.board[0].length).toEqual(64);
+  it("initializes to a 32 x 32 square array", function() {
+    expect(game.board.length).toEqual(32);
+    expect(game.board[0].length).toEqual(32);
   });
 
   it("can take in a 2d array to initialize the living cells", function() {
